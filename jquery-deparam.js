@@ -9,8 +9,10 @@
       
     // Iterate over all name=value pairs.
     $.each(params.replace(/\+/g, ' ').split('&'), function (j,v) {
-      var param = v.split('='),
-          key = decodeURIComponent(param[0]),
+      // split on first equal only
+      var param = v.split(/\=(.+)?/); 
+      param.splice(-1,1);
+      var key = decodeURIComponent(param[0]),
           val,
           cur = obj,
           i = 0,
